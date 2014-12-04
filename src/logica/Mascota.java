@@ -5,6 +5,9 @@
  */
 package logica;
 
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
 /**
  *
  * @author fabricio
@@ -13,7 +16,7 @@ public class Mascota {
     
     //ATRIBUTOS
     private String nombre;
-    private PropietarioMascota propietario;
+    private Persona propietario;
     private String tipo;
     
     //CONSTRUCTOR
@@ -31,11 +34,11 @@ public class Mascota {
         this.nombre = nombre;
     }
 
-    public PropietarioMascota getPropietario() {
+    public Persona getPropietario() {
         return propietario;
     }
 
-    public void setPropietario(PropietarioMascota propietario) {
+    public void setPropietario(Persona propietario) {
         this.propietario = propietario;
     }
 
@@ -47,5 +50,36 @@ public class Mascota {
         this.tipo = tipo;
     }
     
-    
+    /** registrar
+     * Este es un metodo que se encarga de registrar una mascota
+     * @return 
+     */
+    public boolean registrar(){
+        boolean registro = false;
+        FileWriter fichero = null;
+        PrintWriter pw = null;
+        try
+        {
+            fichero = new FileWriter("/Users/fabricio/Documents/fis/archivo_v/mascotas/"+getPropietario().getIdentificacion()+"_"+getNombre()+".txt");
+            pw = new PrintWriter(fichero);
+            
+            pw.println("id:"+getPropietario().getIdentificacion()+"_"+getNombre());
+            pw.println("nombre:"+getNombre());
+            pw.println("tipo:"+getTipo());
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+           try {
+           // Nuevamente aprovechamos el finally para 
+           // asegurarnos que se cierra el fichero.
+            if (null != fichero)
+                fichero.close();
+                registro = true;
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+        }
+        return registro;
+    }
 }

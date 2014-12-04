@@ -52,6 +52,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         registrarUsuario.setText("Registrar Usuario");
 
         registrarMascota.setText("Registrar Mascota");
+        registrarMascota.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                registrarMascotaActionPerformed(evt);
+            }
+        });
 
         atenderMascota.setText("Atender Mascota");
 
@@ -99,6 +104,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         VistaSolicitarCita solicitar = new VistaSolicitarCita();
         solicitar.setVisible(true);
     }//GEN-LAST:event_solicitarCitaActionPerformed
+
+    private void registrarMascotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarMascotaActionPerformed
+        VistaRegistrarMascota vistaregistrarmascota = new VistaRegistrarMascota();
+        vistaregistrarmascota.setVisible(true);
+    }//GEN-LAST:event_registrarMascotaActionPerformed
 
     /**
      * @param args the command line arguments

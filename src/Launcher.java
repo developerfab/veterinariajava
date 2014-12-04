@@ -1,4 +1,6 @@
 
+import base.Conexion;
+import interfaz.Login;
 import interfaz.VentanaPrincipal;
 
 /*
@@ -18,9 +20,8 @@ public class Launcher {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
-        VentanaPrincipal principal = new VentanaPrincipal();
-        principal.setVisible(true);
+        Login login = new Login();
+        login.setVisible(true);
     }
     
 }

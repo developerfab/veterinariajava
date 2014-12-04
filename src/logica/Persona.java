@@ -5,6 +5,9 @@
  */
 package logica;
 
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
 /** Persona
  * Clase que contiene la informacion escencial de una persona
  * @author fabricio
