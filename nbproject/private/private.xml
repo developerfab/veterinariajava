@@ -5,6 +5,7 @@
         <group>
             <file>file:/Users/fabricio/NetBeansProjects/Veterinaria/src/Launcher.java</file>
             <file>file:/Users/fabricio/NetBeansProjects/Veterinaria/src/logica/Cita.java</file>
+            <file>file:/Users/fabricio/NetBeansProjects/Veterinaria/src/interfaz/Login.java</file>
             <file>file:/Users/fabricio/NetBeansProjects/Veterinaria/src/logica/Sesion.java</file>
             <file>file:/Users/fabricio/NetBeansProjects/Veterinaria/src/logica/Persona.java</file>
             <file>file:/Users/fabricio/NetBeansProjects/Veterinaria/src/logica/Mascota.java</file>
@@ -13,10 +14,13 @@
             <file>file:/Users/fabricio/NetBeansProjects/Veterinaria/src/controlador/Controlador.java</file>
             <file>file:/Users/fabricio/NetBeansProjects/Veterinaria/src/interfaz/VistaRegistrarMascota.java</file>
             <file>file:/Users/fabricio/NetBeansProjects/Veterinaria/src/logica/PropietarioMascota.java</file>
+            <file>file:/Users/fabricio/NetBeansProjects/Veterinaria/src/interfaz/VistaRegistroUsuario.java</file>
             <file>file:/Users/fabricio/NetBeansProjects/Veterinaria/src/logica/Doctor.java</file>
             <file>file:/Users/fabricio/NetBeansProjects/Veterinaria/src/logica/Urgencia.java</file>
             <file>file:/Users/fabricio/NetBeansProjects/Veterinaria/src/logica/Cirugia.java</file>
+            <file>file:/Users/fabricio/NetBeansProjects/Veterinaria/src/interfaz/VistaRegistrarMedico.java</file>
             <file>file:/Users/fabricio/NetBeansProjects/Veterinaria/src/interfaz/VistaSolicitarCita.java</file>
+            <file>file:/Users/fabricio/NetBeansProjects/Veterinaria/src/base/Conexion.java</file>
         </group>
     </open-files>
 </project-private>

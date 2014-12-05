@@ -9,6 +9,8 @@ import logica.Mascota;
 import logica.Persona;
 import logica.PropietarioMascota;
 import logica.Sesion;
+import java.util.ArrayList;
+import logica.ConsultaExterna;
 
 /** Controlador
  * Esta clase es la encargada de comunicar la interfaz con la logica de la 
@@ -84,5 +86,37 @@ public class Controlador {
             respuesta = true;
         }
         return respuesta;
+    }
+    /** verMascotas
+     *  Metodo para ver las mascotas de un usuario
+     * @return 
+     */
+    public ArrayList<String> verMascotas(){
+        ArrayList<String> listaMascotas = new ArrayList<>();
+        sesion = Sesion.getSesion();
+        Mascota mascota = new Mascota();
+        mascota.setPropietario(sesion.getPersona());
+        listaMascotas=mascota.listaMascota();
+        return listaMascotas;
+    }
+    
+    /** asignarCita
+     *  Este metodo se encarga de asignar la cita de una mascota
+     * @return 
+     */
+    public boolean asignarCita(String fecha, String doctor, String tipo, String mascota){
+        boolean confirma=false;
+        sesion = Sesion.getSesion();
+        Mascota mascotaobj = new Mascota();
+        mascotaobj.setPropietario(sesion.getPersona());
+        mascotaobj.setNombre(mascota);
+        mascotaobj.traerMascota(sesion.getPersona().getIdentificacion());
+        ConsultaExterna externa = new ConsultaExterna();
+        externa.setDoctor(doctor);
+        externa.setFecha(fecha);
+        externa.setTipo(tipo);
+        externa.setMascota(mascotaobj);
+        confirma = externa.guardarCita(sesion.getPersona());
+        return confirma;
     }
 }

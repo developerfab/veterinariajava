@@ -43,17 +43,23 @@
                           <Component id="jcbxTipo" max="32767" attributes="0"/>
                           <Component id="jcbxMascota" max="32767" attributes="0"/>
                           <Component id="jcbxDoctor" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jcmbxFecha" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jtxfdia" min="-2" pref="41" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jtxfmes" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jtxfanio" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                   </Group>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
                       <Component id="jbtnEnviar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="JBTNCancelar" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="95" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -80,9 +86,11 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jlblFecha" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jcmbxFecha" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtxfdia" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtxfmes" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtxfanio" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="35" max="32767" attributes="0"/>
+              <EmptySpace pref="34" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jbtnEnviar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="JBTNCancelar" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -133,6 +141,9 @@
           </StringArray>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcbxMascotaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jlblDoctor">
       <Properties>
@@ -143,7 +154,7 @@
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="1">
-            <StringItem index="0" value="Seleccione"/>
+            <StringItem index="0" value="Carlos"/>
           </StringArray>
         </Property>
       </Properties>
@@ -153,19 +164,13 @@
         <Property name="text" type="java.lang.String" value="FECHA:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jcmbxFecha">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="1">
-            <StringItem index="0" value="Seleccione"/>
-          </StringArray>
-        </Property>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="jbtnEnviar">
       <Properties>
         <Property name="text" type="java.lang.String" value="ENVIAR"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnEnviarActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="JBTNCancelar">
       <Properties>
@@ -174,6 +179,24 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="JBTNCancelarActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtxfdia">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="dd"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtxfdiaActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtxfmes">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="mm"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtxfanio">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="aaaa"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

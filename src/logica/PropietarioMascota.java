@@ -5,6 +5,7 @@
  */
 package logica;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 
@@ -44,8 +45,9 @@ public class PropietarioMascota extends Persona{
         FileWriter fichero = null;
         PrintWriter pw = null;
         try
-        {
-            fichero = new FileWriter("/Users/fabricio/Documents/fis/archivo_v/"+getIdentificacion()+".txt");
+        {   File file = new File("/Users/fabricio/Documents/fis/archivo_v/"+getIdentificacion());
+            file.mkdir();
+            fichero = new FileWriter("/Users/fabricio/Documents/fis/archivo_v/"+getIdentificacion()+"/"+getIdentificacion()+".txt");
             pw = new PrintWriter(fichero);
             
             pw.println(pass);

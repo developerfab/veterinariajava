@@ -65,7 +65,7 @@ public class Sesion {
     public int iniciarSesion(String pass){
         int iniciar_sesion = 0;
         //se comprueba si el usuario existe
-        File archivo = new File ("/Users/fabricio/Documents/fis/archivo_v/"+getId_usuario()+".txt");
+        File archivo = new File ("/Users/fabricio/Documents/fis/archivo_v/"+getId_usuario()+"/"+getId_usuario()+".txt");
         try{
             FileReader fr = new FileReader (archivo);
             BufferedReader br = new BufferedReader(fr);
@@ -89,7 +89,6 @@ public class Sesion {
             setPersona(persona);
         }
         catch(Exception e){
-            System.out.println("yucas");
             iniciar_sesion =-1;
         }
         

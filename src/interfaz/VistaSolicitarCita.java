@@ -5,17 +5,34 @@
  */
 package interfaz;
 
+import controlador.Controlador;
+import java.util.ArrayList;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author fabricio
  */
 public class VistaSolicitarCita extends javax.swing.JFrame {
+    
+    private Controlador controlador = new Controlador();
 
     /**
      * Creates new form VistaSolicitarCita
      */
     public VistaSolicitarCita() {
+        
         initComponents();
+        ArrayList<String> lista = controlador.verMascotas();
+        String[] listavista = new String[lista.size()];
+        
+        for(int i=1; i<lista.size();i++){
+            listavista[i] = lista.get(i);
+        }
+        this.jcbxMascota.setModel(new DefaultComboBoxModel(listavista));
     }
 
     /**
@@ -35,9 +52,11 @@ public class VistaSolicitarCita extends javax.swing.JFrame {
         jlblDoctor = new javax.swing.JLabel();
         jcbxDoctor = new javax.swing.JComboBox();
         jlblFecha = new javax.swing.JLabel();
-        jcmbxFecha = new javax.swing.JComboBox();
         jbtnEnviar = new javax.swing.JButton();
         JBTNCancelar = new javax.swing.JButton();
+        jtxfdia = new javax.swing.JTextField();
+        jtxfmes = new javax.swing.JTextField();
+        jtxfanio = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,16 +71,24 @@ public class VistaSolicitarCita extends javax.swing.JFrame {
         jlblMascota.setText("MASCOTA:");
 
         jcbxMascota.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione" }));
+        jcbxMascota.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbxMascotaActionPerformed(evt);
+            }
+        });
 
         jlblDoctor.setText("DOCTOR:");
 
-        jcbxDoctor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione" }));
+        jcbxDoctor.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Carlos" }));
 
         jlblFecha.setText("FECHA:");
 
-        jcmbxFecha.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seleccione" }));
-
         jbtnEnviar.setText("ENVIAR");
+        jbtnEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnEnviarActionPerformed(evt);
+            }
+        });
 
         JBTNCancelar.setText("CANCELAR");
         JBTNCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -69,6 +96,17 @@ public class VistaSolicitarCita extends javax.swing.JFrame {
                 JBTNCancelarActionPerformed(evt);
             }
         });
+
+        jtxfdia.setText("dd");
+        jtxfdia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxfdiaActionPerformed(evt);
+            }
+        });
+
+        jtxfmes.setText("mm");
+
+        jtxfanio.setText("aaaa");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -92,13 +130,18 @@ public class VistaSolicitarCita extends javax.swing.JFrame {
                             .addComponent(jcbxTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jcbxMascota, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jcbxDoctor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jcmbxFecha, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jtxfdia, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jtxfmes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jtxfanio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(59, 59, 59)
                         .addComponent(jbtnEnviar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(JBTNCancelar)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,8 +163,10 @@ public class VistaSolicitarCita extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlblFecha)
-                    .addComponent(jcmbxFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                    .addComponent(jtxfdia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtxfmes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtxfanio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnEnviar)
                     .addComponent(JBTNCancelar))
@@ -134,6 +179,28 @@ public class VistaSolicitarCita extends javax.swing.JFrame {
     private void JBTNCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_JBTNCancelarActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_JBTNCancelarActionPerformed
+
+    private void jcbxMascotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbxMascotaActionPerformed
+        
+    }//GEN-LAST:event_jcbxMascotaActionPerformed
+
+    private void jtxfdiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxfdiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtxfdiaActionPerformed
+
+    private void jbtnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEnviarActionPerformed
+        String tipo = this.jcbxTipo.getSelectedItem().toString();
+        String mascota = this.jcbxMascota.getSelectedItem().toString();
+        String doctor = this.jcbxDoctor.getSelectedItem().toString();
+        String fecha = this.jtxfdia.getText()+"/"+this.jtxfmes.getText()+"/"+this.jtxfanio.getText();
+        
+        if(controlador.asignarCita(fecha, doctor, tipo, mascota)){
+            JOptionPane.showMessageDialog(null, "Cita asignada");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Error en los datos");
+        }
+    }//GEN-LAST:event_jbtnEnviarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -176,10 +243,12 @@ public class VistaSolicitarCita extends javax.swing.JFrame {
     private javax.swing.JComboBox jcbxDoctor;
     private javax.swing.JComboBox jcbxMascota;
     private javax.swing.JComboBox jcbxTipo;
-    private javax.swing.JComboBox jcmbxFecha;
     private javax.swing.JLabel jlblDoctor;
     private javax.swing.JLabel jlblFecha;
     private javax.swing.JLabel jlblMascota;
+    private javax.swing.JTextField jtxfanio;
+    private javax.swing.JTextField jtxfdia;
+    private javax.swing.JTextField jtxfmes;
     private javax.swing.JLabel lblsolicitarCita;
     private javax.swing.JLabel lbltipo;
     // End of variables declaration//GEN-END:variables
