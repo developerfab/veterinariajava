@@ -8,7 +8,9 @@ package base;
 import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import sun.applet.Main;
 
@@ -18,15 +20,27 @@ import sun.applet.Main;
  */
 public class Conexion {
     
-    Connection conexion;
+    private Connection conexion;
 
-    Statement sentencia;
+    private Statement sentencia;
+    
+    private static Conexion objConexion=null;
+    
 
-    public Conexion(){
+    private Conexion(){
         
     }
     
-    public void PrepararBaseDatos() {
+    public static Conexion getConexion() throws SQLException{
+        if(objConexion==null){
+            objConexion = new Conexion();
+            
+        }
+        return objConexion;
+    }
+    
+    //conexion con la base de datos
+    public Connection PrepararBaseDatos() throws SQLException {
 
      
 
@@ -46,39 +60,18 @@ public class Conexion {
 
         try {
 
-            String DSN="jdbc:mysql://localhost/veterinaria";
+            String DSN="jdbc:mysql://127.0.0.1:3306/veterinaria";
 
             String user="veterinaria";
 
             String password="medellin";
 
             conexion=DriverManager.getConnection(DSN,user,password);
-
+            
         }
-
         catch (Exception e) {
-
             JOptionPane.showMessageDialog(null,"Error al realizar la conexion");
-
         }
-
-        try {
-
-            sentencia=(Statement) conexion.createStatement(
-
-                    ResultSet.TYPE_SCROLL_INSENSITIVE,
-
-                    ResultSet.CONCUR_READ_ONLY);
-
-        }
-
-        catch (Exception e) {
-
-            JOptionPane.showMessageDialog(null,"Error al crear el objeto sentencia");
-
-        }
-
-     }
-    
-    
+        return conexion;
+   }
 }
