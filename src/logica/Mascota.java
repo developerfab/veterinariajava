@@ -5,11 +5,14 @@
  */
 package logica;
 
+import base.Conexion;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 /**
@@ -22,6 +25,7 @@ public class Mascota {
     private String nombre;
     private Persona propietario;
     private String tipo;
+    private Connection conexion;
     
     //CONSTRUCTOR
     public Mascota(){
@@ -60,31 +64,29 @@ public class Mascota {
      */
     public boolean registrar(){
         boolean registro = false;
-        FileWriter fichero = null;
-        PrintWriter pw = null;
-        try
-        {   File file = new File("/Users/fabricio/Documents/fis/archivo_v/"+getPropietario().getIdentificacion()+"/mascotas/");
-            file.mkdir();
-            fichero = new FileWriter("/Users/fabricio/Documents/fis/archivo_v/"+getPropietario().getIdentificacion()+"/mascotas/"+getNombre()+".txt");
-            
-            pw = new PrintWriter(fichero);
-            
-            pw.println("id:"+getPropietario().getIdentificacion()+"_"+getNombre());
-            pw.println("nombre:"+getNombre());
-            pw.println("tipo:"+getTipo());
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-           try {
-           // Nuevamente aprovechamos el finally para 
-           // asegurarnos que se cierra el fichero.
-            if (null != fichero)
-                fichero.close();
-                registro = true;
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
+        Sesion sesion = Sesion.getSesion();
+        setPropietario(sesion.getPersona());
+        System.out.println("asdf: "+getPropietario().getIdentificacion());
+        try{
+            System.out.println("1");
+            Conexion conexion_hab = Conexion.getConexion();
+            System.out.println("2");
+            conexion = conexion_hab.PrepararBaseDatos();
+            System.out.println("3");
+            PreparedStatement a = conexion.prepareStatement("INSERT INTO MASCOTA VALUES (?,?,?)");
+            System.out.println("4: "+getPropietario().getIdentificacion());
+            a.setInt(1,getPropietario().getIdentificacion());
+            System.out.println("5");
+            a.setString(2, getNombre());
+            System.out.println("6");
+            a.setString(3, getTipo());
+            System.out.println("7");
+            a.executeUpdate(); 
+            System.out.println("8");
+            registro=true;
+        }
+        catch(Exception e){
+            registro=false;
         }
         return registro;
     }

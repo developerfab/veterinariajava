@@ -5,10 +5,15 @@
  */
 package logica;
 
+import base.Conexion;
+import java.beans.Statement;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -20,7 +25,7 @@ public class Sesion {
     private int id_usuario;
     private Persona persona;
     private static Sesion sesion=null;
-    
+    private Conexion conexion;
     //CONSTRUCTOR
     private Sesion(){
         
@@ -62,36 +67,24 @@ public class Sesion {
      * @param pass
      * @return 
      */
-    public int iniciarSesion(String pass){
+    public int iniciarSesion(String pass) throws SQLException{
         int iniciar_sesion = 0;
-        //se comprueba si el usuario existe
-        File archivo = new File ("/Users/fabricio/Documents/fis/archivo_v/"+getId_usuario()+"/"+getId_usuario()+".txt");
-        try{
-            FileReader fr = new FileReader (archivo);
-            BufferedReader br = new BufferedReader(fr);
-            String linea = br.readLine();
-            String[] contenido = new String[6];
-            contenido[0]=linea;
-            int i =1;
-            while((linea=br.readLine())!=null){
-                contenido[i]=linea;
-                i++;
-            }
-            if(contenido[0].equals(pass)){
+        conexion = Conexion.getConexion();
+        Connection con = conexion.PrepararBaseDatos();
+        java.sql.Statement statement = con.createStatement();
+        ResultSet result = statement.executeQuery("select * from REGISTRO");
+        while (result.next()) 
+        {
+            if((result.getInt(1)==getId_usuario())&&(result.getString(4).equals(pass))){
+                setId_usuario(result.getInt(1));
+                Persona persona = new Persona();
+                persona.setNombre(result.getString(2));
+                persona.setApellido(result.getString(3));
+                persona.setIdentificacion(result.getInt(1));
+                setPersona(persona);
                 iniciar_sesion=1;
-            }  
-            
-            Persona persona = new PropietarioMascota();
-            persona.setNombre(contenido[2].split("nombre:")[1]);
-            persona.setIdentificacion(Integer.parseInt(contenido[1].split("documento:")[1]));
-            persona.setApellido(contenido[3].split("apellido:")[1]);
-            
-            setPersona(persona);
+            }
         }
-        catch(Exception e){
-            iniciar_sesion =-1;
-        }
-        
         return iniciar_sesion;
     }
 
