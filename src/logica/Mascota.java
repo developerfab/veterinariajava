@@ -66,23 +66,14 @@ public class Mascota {
         boolean registro = false;
         Sesion sesion = Sesion.getSesion();
         setPropietario(sesion.getPersona());
-        System.out.println("asdf: "+getPropietario().getIdentificacion());
         try{
-            System.out.println("1");
             Conexion conexion_hab = Conexion.getConexion();
-            System.out.println("2");
             conexion = conexion_hab.PrepararBaseDatos();
-            System.out.println("3");
             PreparedStatement a = conexion.prepareStatement("INSERT INTO MASCOTA VALUES (?,?,?)");
-            System.out.println("4: "+getPropietario().getIdentificacion());
-            a.setInt(1,getPropietario().getIdentificacion());
-            System.out.println("5");
+            a.setString(1,getPropietario().getIdentificacion()+"_"+getNombre());
             a.setString(2, getNombre());
-            System.out.println("6");
             a.setString(3, getTipo());
-            System.out.println("7");
             a.executeUpdate(); 
-            System.out.println("8");
             registro=true;
         }
         catch(Exception e){
