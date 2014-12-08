@@ -50,7 +50,7 @@ public class PropietarioMascota extends Persona{
         try{
             Conexion conexion_hab = Conexion.getConexion();
             conexion = conexion_hab.PrepararBaseDatos();
-            PreparedStatement a = conexion.prepareStatement("INSERT INTO REGISTRO VALUES (?,?,?,?)");
+            PreparedStatement a = conexion.prepareStatement("INSERT INTO PROPIETARIO VALUES (?,?,?,?)");
             a.setInt(1, getIdentificacion());
             a.setString(2, getNombre());
             a.setString(3, getApellido());

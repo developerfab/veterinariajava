@@ -30,7 +30,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         tituloPrincipal = new javax.swing.JLabel();
         solicitarCita = new javax.swing.JButton();
         cancelarCita = new javax.swing.JButton();
-        registrarUsuario = new javax.swing.JButton();
         registrarMascota = new javax.swing.JButton();
         atenderMascota = new javax.swing.JButton();
 
@@ -48,8 +47,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         cancelarCita.setText("Cancelar Cita");
-
-        registrarUsuario.setText("Registrar Usuario");
 
         registrarMascota.setText("Registrar Mascota");
         registrarMascota.addActionListener(new java.awt.event.ActionListener() {
@@ -72,7 +69,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGap(130, 130, 130)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(atenderMascota, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(registrarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(cancelarCita, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                         .addComponent(solicitarCita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -89,12 +85,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cancelarCita)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(registrarUsuario)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(registrarMascota)
                 .addGap(12, 12, 12)
                 .addComponent(atenderMascota)
-                .addContainerGap(55, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         pack();
@@ -149,7 +143,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton atenderMascota;
     private javax.swing.JButton cancelarCita;
     private javax.swing.JButton registrarMascota;
-    private javax.swing.JButton registrarUsuario;
     private javax.swing.JButton solicitarCita;
     private javax.swing.JLabel tituloPrincipal;
     // End of variables declaration//GEN-END:variables

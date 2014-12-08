@@ -72,7 +72,7 @@ public class Sesion {
         conexion = Conexion.getConexion();
         Connection con = conexion.PrepararBaseDatos();
         java.sql.Statement statement = con.createStatement();
-        ResultSet result = statement.executeQuery("select * from REGISTRO");
+        ResultSet result = statement.executeQuery("select * from PROPIETARIO");
         while (result.next()) 
         {
             if((result.getInt(1)==getId_usuario())&&(result.getString(4).equals(pass))){

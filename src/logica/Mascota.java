@@ -69,10 +69,11 @@ public class Mascota {
         try{
             Conexion conexion_hab = Conexion.getConexion();
             conexion = conexion_hab.PrepararBaseDatos();
-            PreparedStatement a = conexion.prepareStatement("INSERT INTO MASCOTA VALUES (?,?,?)");
+            PreparedStatement a = conexion.prepareStatement("INSERT INTO MASCOTA VALUES (?,?,?,?)");
             a.setString(1,getPropietario().getIdentificacion()+"_"+getNombre());
-            a.setString(2, getNombre());
-            a.setString(3, getTipo());
+            a.setInt(2, getPropietario().getIdentificacion());
+            a.setString(3, getNombre());
+            a.setString(4, getTipo());
             a.executeUpdate(); 
             registro=true;
         }
