@@ -5,12 +5,18 @@
  */
 package interfaz;
 
+import controlador.Controlador;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author fabricio
  */
 public class VistaAtender extends javax.swing.JFrame {
 
+    //ATRIBUTOS
+    
+    private Controlador control = new Controlador();
     /**
      * Creates new form VistaAtender
      */
@@ -42,6 +48,11 @@ public class VistaAtender extends javax.swing.JFrame {
         jlblidCita.setText("ID CITA:");
 
         jbtnenviar.setText("ENVIAR");
+        jbtnenviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnenviarActionPerformed(evt);
+            }
+        });
 
         jbtnCancelar.setText("CANCELAR");
         jbtnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -92,6 +103,16 @@ public class VistaAtender extends javax.swing.JFrame {
     private void jbtnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCancelarActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_jbtnCancelarActionPerformed
+
+    private void jbtnenviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnenviarActionPerformed
+        String id_cita = this.jtxfidCita.getText();
+        if(control.atenderMascota(id_cita)){
+            JOptionPane.showMessageDialog(null, "Estado cambiado a: Atendiendo Mascota");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Registro no encontrado");
+        }
+    }//GEN-LAST:event_jbtnenviarActionPerformed
 
     /**
      * @param args the command line arguments

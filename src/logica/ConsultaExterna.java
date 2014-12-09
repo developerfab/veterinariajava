@@ -109,12 +109,9 @@ public class ConsultaExterna extends Cita{
         try{
             Conexion conexion_hab = Conexion.getConexion();
             conexion = conexion_hab.PrepararBaseDatos();
-            System.out.println("1");
             PreparedStatement a = conexion.prepareStatement("DELETE FROM CITA WHERE id_cita = ?");
-            System.out.println("2");
             a.setInt(1, Integer.parseInt(id_cita));
             a.executeUpdate(); 
-            System.out.println("3");
             registro=true;
         }
         catch(Exception e){
@@ -124,6 +121,29 @@ public class ConsultaExterna extends Cita{
         return registro;
         
         
+    }
+    
+    /** atender
+     * Este metodo se encarga de cambiar el estado de la cita en la base de datos
+     * @param id_cita
+     * @return 
+     */
+    public boolean atender(String id_cita){
+        boolean registro = false;
+        try{
+            Conexion conexion_hab = Conexion.getConexion();
+            conexion = conexion_hab.PrepararBaseDatos();
+            PreparedStatement a = conexion.prepareStatement("UPDATE CITA SET estado = ? WHERE id_cita = ?");
+            a.setString(1, "Atendiendo");
+            a.setInt(2, Integer.parseInt(id_cita));
+            a.executeUpdate(); 
+            registro=true;
+        }
+        catch(Exception e){
+            registro=false;
+        }
+        
+        return registro;
     }
     
 }

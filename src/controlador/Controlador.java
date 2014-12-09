@@ -201,4 +201,18 @@ public class Controlador {
         registro=externa.cancelarCita(id_cita);
         return registro;
     }
+    
+    /** atenderMascota
+     * Este metodo se encarga de enviar los datos de la capa de interfaz a la 
+     * capa logica para el cambio del estado de la cita.
+     * @param id_cita
+     * @return 
+     */
+    public boolean atenderMascota(String id_cita){
+        boolean registro = false;
+        ConsultaExterna externa = new ConsultaExterna();
+        registro = externa.atender(id_cita);
+        return registro;
+        
+    }
 }

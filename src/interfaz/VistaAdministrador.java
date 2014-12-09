@@ -96,7 +96,8 @@ public class VistaAdministrador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtn_atender_mascotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_atender_mascotaActionPerformed
-        // TODO add your handling code here:
+        VistaAtender atender = new VistaAtender();
+        atender.setVisible(true);
     }//GEN-LAST:event_jbtn_atender_mascotaActionPerformed
 
     private void jbtn_registrar_medicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtn_registrar_medicoActionPerformed
