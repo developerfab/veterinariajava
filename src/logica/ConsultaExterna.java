@@ -5,9 +5,16 @@
  */
 package logica;
 
+import base.Conexion;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /** ConsultaExterna
  * Es un tipo especial de cita.
@@ -16,8 +23,9 @@ import java.io.PrintWriter;
 public class ConsultaExterna extends Cita{
     
     //ATRIBUTOS
-    private String fecha;
-    private String doctor;
+    private Date fecha;
+    private Doctor doctor;
+    private Conexion conexion_hab;
     private String tipo;
     
     //CONSTRUCTOR
@@ -26,19 +34,19 @@ public class ConsultaExterna extends Cita{
     }
     //METODOS
 
-    public String getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
-    public String getDoctor() {
+    public Doctor getDoctor() {
         return doctor;
     }
 
-    public void setDoctor(String doctor) {
+    public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
     }
 
@@ -57,31 +65,29 @@ public class ConsultaExterna extends Cita{
      */
     public boolean guardarCita(Persona persona){
         boolean confirma = false;
-        FileWriter fichero = null;
-        PrintWriter pw = null;
-        try
-        {   File file = new File("/Users/fabricio/Documents/fis/fecha/");
-            file.mkdir();
-            fichero = new FileWriter("/Users/fabricio/Documents/fis/fecha/fecha.txt");
-            pw = new PrintWriter(fichero);
-            
-            pw.println(persona.getIdentificacion()+":"+getFecha()+":"+getDoctor()+":"+getTipo()+":"+getMascota().getNombre());
-            
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-           try {
-           // Nuevamente aprovechamos el finally para 
-           // asegurarnos que se cierra el fichero.
-            if (null != fichero)
-                fichero.close();
-                confirma = true;
-            } catch (Exception e2) {
-                e2.printStackTrace();
+        int num_cita=0;
+        try{
+            conexion_hab = Conexion.getConexion();
+            Connection con = conexion_hab.PrepararBaseDatos();
+            java.sql.Statement statement = con.createStatement();
+            ResultSet result = statement.executeQuery("SELECT COUNT(*) as total FROM CITA");
+            while(result.next()){
+                num_cita = result.getInt(1);
             }
+            
+            PreparedStatement a = con.prepareStatement("INSERT INTO CITA VALUES (?,?,?,?,?,?)");
+            a.setInt(1, num_cita+1);
+            a.setInt(2, getDoctor().getLicencia());
+            a.setString(3, persona.getIdentificacion()+"_"+getMascota().getNombre());
+            a.setDate(4, getFecha());
+            a.setInt(5, getConsultorio());
+            a.setString(6, getTipo());
+            a.executeUpdate(); 
+            confirma=true;
+            JOptionPane.showConfirmDialog(null, "Id de su cita: "+(num_cita+1));
+        }catch(Exception e){
+            confirma=false;
         }
-        
         return confirma;
     }
     

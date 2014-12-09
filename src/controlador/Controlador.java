@@ -5,12 +5,17 @@
  */
 package controlador;
 
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import logica.Mascota;
 import logica.Persona;
 import logica.PropietarioMascota;
 import logica.Sesion;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import static javax.print.attribute.Size2DSyntax.MM;
 import logica.ConsultaExterna;
 import logica.Doctor;
 
@@ -137,7 +142,7 @@ public class Controlador {
         ArrayList<String> lista = new ArrayList<>();
         Doctor doctor = new Doctor();
         for(int i=0; i<doctor.listaDoctor().size();i++){
-            lista.add(doctor.listaDoctor().get(i).getNombre());
+            lista.add(doctor.listaDoctor().get(i).getLicencia()+"-"+doctor.listaDoctor().get(i).getNombre());
         }
         return lista;
     }
@@ -146,18 +151,38 @@ public class Controlador {
      *  Este metodo se encarga de asignar la cita de una mascota
      * @return 
      */
-    public boolean asignarCita(String fecha, String doctor, String tipo, String mascota){
+    public boolean asignarCita(String fecha, String doctor, String tipo, String mascota, String consultorio){
         boolean confirma=false;
         sesion = Sesion.getSesion();
+        
+        //objeto mascota
         Mascota mascotaobj = new Mascota();
         mascotaobj.setPropietario(sesion.getPersona());
         mascotaobj.setNombre(mascota);
         mascotaobj.traerMascota(sesion.getPersona().getIdentificacion());
+        
+        //objeto doctor
+        Doctor doc = new Doctor();
+        doc.setLicencia(Integer.parseInt(doctor.split("-")[0]));
+        doc.setNombre(doctor.split("-")[1]);
+        
+        //objeto fecha
+        SimpleDateFormat formatoDelTexto = new SimpleDateFormat("yyyy-MM-dd");
+        Date fecha_date = null;
+        try{
+            fecha_date =new java.sql.Date(formatoDelTexto.parse(fecha).getTime());
+        }catch(Exception e){
+            fecha_date = null;
+            confirma = false;
+        }
+        
+        //objeto consulta externa
         ConsultaExterna externa = new ConsultaExterna();
-        externa.setDoctor(doctor);
-        externa.setFecha(fecha);
-        externa.setTipo(tipo);
+        externa.setDoctor(doc);
         externa.setMascota(mascotaobj);
+        externa.setConsultorio(Integer.parseInt(consultorio));
+        externa.setTipo(tipo);
+        externa.setFecha(fecha_date);
         confirma = externa.guardarCita(sesion.getPersona());
         return confirma;
     }

@@ -55,6 +55,8 @@ public class VistaSolicitarCita extends javax.swing.JFrame {
         jtxfdia = new javax.swing.JTextField();
         jtxfmes = new javax.swing.JTextField();
         jtxfanio = new javax.swing.JTextField();
+        jlblconsultorio = new javax.swing.JLabel();
+        jtxfconsultorio = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -106,6 +108,8 @@ public class VistaSolicitarCita extends javax.swing.JFrame {
 
         jtxfanio.setText("aaaa");
 
+        jlblconsultorio.setText("CONSULTORIO:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -122,6 +126,7 @@ public class VistaSolicitarCita extends javax.swing.JFrame {
                             .addComponent(lbltipo)
                             .addComponent(jlblMascota)
                             .addComponent(jlblDoctor)
+                            .addComponent(jlblconsultorio)
                             .addComponent(jlblFecha))
                         .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -133,13 +138,14 @@ public class VistaSolicitarCita extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(jtxfmes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jtxfanio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jtxfanio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtxfconsultorio)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(59, 59, 59)
                         .addComponent(jbtnEnviar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(JBTNCancelar)))
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,7 +170,11 @@ public class VistaSolicitarCita extends javax.swing.JFrame {
                     .addComponent(jtxfdia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtxfmes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtxfanio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlblconsultorio)
+                    .addComponent(jtxfconsultorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnEnviar)
                     .addComponent(JBTNCancelar))
@@ -190,9 +200,10 @@ public class VistaSolicitarCita extends javax.swing.JFrame {
         String tipo = this.jcbxTipo.getSelectedItem().toString();
         String mascota = this.jcbxMascota.getSelectedItem().toString();
         String doctor = this.jcbxDoctor.getSelectedItem().toString();
-        String fecha = this.jtxfdia.getText()+"/"+this.jtxfmes.getText()+"/"+this.jtxfanio.getText();
+        String fecha = this.jtxfanio.getText()+"-"+this.jtxfmes.getText()+"-"+this.jtxfdia.getText();
+        String consultorio = this.jtxfconsultorio.getText();
         
-        if(controlador.asignarCita(fecha, doctor, tipo, mascota)){
+        if(controlador.asignarCita(fecha, doctor, tipo, mascota, consultorio)){
             JOptionPane.showMessageDialog(null, "Cita asignada");
         }
         else{
@@ -248,7 +259,9 @@ public class VistaSolicitarCita extends javax.swing.JFrame {
     private javax.swing.JLabel jlblDoctor;
     private javax.swing.JLabel jlblFecha;
     private javax.swing.JLabel jlblMascota;
+    private javax.swing.JLabel jlblconsultorio;
     private javax.swing.JTextField jtxfanio;
+    private javax.swing.JTextField jtxfconsultorio;
     private javax.swing.JTextField jtxfdia;
     private javax.swing.JTextField jtxfmes;
     private javax.swing.JLabel lblsolicitarCita;
