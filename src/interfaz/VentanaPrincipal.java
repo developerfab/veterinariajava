@@ -5,6 +5,10 @@
  */
 package interfaz;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author fabricio
@@ -95,8 +99,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void solicitarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solicitarCitaActionPerformed
-        VistaSolicitarCita solicitar = new VistaSolicitarCita();
-        solicitar.setVisible(true);
+        VistaSolicitarCita solicitar;
+        try {
+            solicitar = new VistaSolicitarCita();
+            solicitar.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(VentanaPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_solicitarCitaActionPerformed
 
     private void registrarMascotaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarMascotaActionPerformed

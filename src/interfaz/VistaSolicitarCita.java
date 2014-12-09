@@ -6,7 +6,10 @@
 package interfaz;
 
 import controlador.Controlador;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -23,16 +26,11 @@ public class VistaSolicitarCita extends javax.swing.JFrame {
     /**
      * Creates new form VistaSolicitarCita
      */
-    public VistaSolicitarCita() {
-        
+    public VistaSolicitarCita() throws SQLException {
+        this.setTitle("Solicitar cita");
         initComponents();
-        ArrayList<String> lista = controlador.verMascotas();
-        String[] listavista = new String[lista.size()];
+        listas();
         
-        for(int i=1; i<lista.size();i++){
-            listavista[i] = lista.get(i);
-        }
-        this.jcbxMascota.setModel(new DefaultComboBoxModel(listavista));
     }
 
     /**
@@ -232,7 +230,11 @@ public class VistaSolicitarCita extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VistaSolicitarCita().setVisible(true);
+                try {
+                    new VistaSolicitarCita().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(VistaSolicitarCita.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -252,4 +254,29 @@ public class VistaSolicitarCita extends javax.swing.JFrame {
     private javax.swing.JLabel lblsolicitarCita;
     private javax.swing.JLabel lbltipo;
     // End of variables declaration//GEN-END:variables
+    
+    /** listas
+     * Este metodo se encarga de renderizar las listas de mascota y doctores.
+     * @throws SQLException 
+     */
+    public void listas() throws SQLException{
+        //lista de mascotas
+        ArrayList<String> lista = controlador.verMascotas();
+        String[] listavista = new String[lista.size()];
+        
+        for(int i=0; i<lista.size();i++){
+            listavista[i] = lista.get(i);
+        }
+        this.jcbxMascota.setModel(new DefaultComboBoxModel(listavista));
+        
+        //lista doctores
+        
+        ArrayList<String> lista_doc = controlador.verDoctores();
+        String[] listadoctor = new String[lista_doc.size()];
+        for(int i=0; i<lista_doc.size();i++){
+            listadoctor[i] = lista_doc.get(i);
+        }
+        this.jcbxDoctor.setModel(new DefaultComboBoxModel(listadoctor));
+    }
 }
+

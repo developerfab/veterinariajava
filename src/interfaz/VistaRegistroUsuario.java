@@ -21,6 +21,7 @@ public class VistaRegistroUsuario extends javax.swing.JFrame {
      * Creates new form VistaRegistroUsuario
      */
     public VistaRegistroUsuario() {
+        this.setTitle("Reistrar usuario");
         initComponents();
     }
 

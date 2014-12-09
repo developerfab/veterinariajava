@@ -5,12 +5,14 @@
  */
 package controlador;
 
+import java.sql.SQLException;
 import logica.Mascota;
 import logica.Persona;
 import logica.PropietarioMascota;
 import logica.Sesion;
 import java.util.ArrayList;
 import logica.ConsultaExterna;
+import logica.Doctor;
 
 /** Controlador
  * Esta clase es la encargada de comunicar la interfaz con la logica de la 
@@ -35,7 +37,7 @@ public class Controlador {
      * @param pass
      * @return 
      */
-    public boolean logeo(String id_usuario, String pass){
+    public boolean logeo(String id_usuario, String pass) throws SQLException{
         boolean login = false;
         sesion = Sesion.getSesion();
         sesion.setId_usuario(Integer.parseInt(id_usuario));
@@ -69,6 +71,27 @@ public class Controlador {
         return registro;
     }
     
+    /** registrarMedico
+     * Este metodo se encarga de recibir los datos de la capa de interfaz y 
+     * enviarlos a la capa de logica en la clase de Doctor.
+     * @param nombre
+     * @param documento
+     * @param licencia
+     * @param especialidad
+     * @return 
+     */
+    public boolean registrarMedico(String nombre, String documento, int licencia, String especialidad){
+        boolean registro = false;
+        Doctor doctor = new Doctor();
+        doctor.setEspecialidad(especialidad);
+        doctor.setLicencia(licencia);
+        doctor.setNombre(nombre);
+        doctor.setIdentificacion(Integer.parseInt(documento));
+        doctor.registrar();
+        registro = true;
+        return registro;
+    }
+    
     /** registrarMascota
      * Se envian los datos desde la interfaz a la logica del registro
      * @param nombre
@@ -91,13 +114,32 @@ public class Controlador {
      *  Metodo para ver las mascotas de un usuario
      * @return 
      */
-    public ArrayList<String> verMascotas(){
+    public ArrayList<String> verMascotas() throws SQLException{
         ArrayList<String> listaMascotas = new ArrayList<>();
         sesion = Sesion.getSesion();
         Mascota mascota = new Mascota();
         mascota.setPropietario(sesion.getPersona());
-        listaMascotas=mascota.listaMascota();
+        mascota.setPropietario(sesion.getPersona());
+        for(int i=0;i<mascota.listaMascota().size();i++){
+            listaMascotas.add(mascota.listaMascota().get(i).getNombre());
+        }
+        
         return listaMascotas;
+    }
+    
+    /** verDoctores
+     * Este metodo pide a la capa logica la lista de doctores inscritos
+     * en la base de datos
+     * @return
+     * @throws SQLException 
+     */
+    public ArrayList<String> verDoctores() throws SQLException{
+        ArrayList<String> lista = new ArrayList<>();
+        Doctor doctor = new Doctor();
+        for(int i=0; i<doctor.listaDoctor().size();i++){
+            lista.add(doctor.listaDoctor().get(i).getNombre());
+        }
+        return lista;
     }
     
     /** asignarCita

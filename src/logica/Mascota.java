@@ -13,6 +13,8 @@ import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -26,6 +28,7 @@ public class Mascota {
     private Persona propietario;
     private String tipo;
     private Connection conexion;
+    private Conexion conexion_hab;
     
     //CONSTRUCTOR
     public Mascota(){
@@ -87,15 +90,21 @@ public class Mascota {
      *  retorna la lista de mascotas de un usuario
      * @return 
      */
-    public ArrayList<String> listaMascota(){
-        ArrayList<String> lista = new ArrayList<>();
-        File folder = new File("/Users/fabricio/Documents/fis/archivo_v/"+getPropietario().getIdentificacion()+"/mascotas/");
-        File[] listOfFiles = folder.listFiles();
-
-        for (File file : listOfFiles) {
-            if (file.isFile()) {
-                lista.add(file.getName().split(".txt")[0]);
-            }
+    public ArrayList<Mascota> listaMascota() throws SQLException{
+        ArrayList<Mascota> lista = new ArrayList<>();
+        
+        conexion_hab = Conexion.getConexion();
+        Connection con = conexion_hab.PrepararBaseDatos();
+        java.sql.Statement statement = con.createStatement();
+        ResultSet result = statement.executeQuery("SELECT * FROM `MASCOTA` WHERE `propietario`="+getPropietario().getIdentificacion());
+        while (result.next()) 
+        {
+            Mascota mascota_aux = new Mascota();
+            mascota_aux.setNombre(result.getString(3));
+            mascota_aux.setTipo(result.getString(4));
+            lista.add(mascota_aux);
+            mascota_aux=null;
+            
         }
         return lista;
     }

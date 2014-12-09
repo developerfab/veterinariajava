@@ -21,6 +21,7 @@ public class VistaRegistrarMascota extends javax.swing.JFrame {
      * Creates new form VistaRegistrarMascota
      */
     public VistaRegistrarMascota() {
+        this.setTitle("Registro de mascota");
         initComponents();
     }
 

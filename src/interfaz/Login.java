@@ -6,6 +6,9 @@
 package interfaz;
 
 import controlador.Controlador;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,6 +25,7 @@ public class Login extends javax.swing.JFrame {
      * Creates new form Login
      */
     public Login() {
+        this.setTitle("Login");
         initComponents();
     }
 
@@ -134,14 +138,23 @@ public class Login extends javax.swing.JFrame {
         String usuario = this.jtxfusuario.getText();
         String pass = this.jtxtfpass.getText();
         
-        if(controlador.logeo(usuario, pass)){
-            VentanaPrincipal principal = new VentanaPrincipal();
-            principal.setVisible(true);
-            this.setVisible(false);
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Error en los datos, por favor confirme");
+        try {
+            if(usuario.equals("administrador")&&pass.equals("1234")){
+                VistaAdministrador admin = new VistaAdministrador();
+                admin.setVisible(true);
+            }
             
+            else if(controlador.logeo(usuario, pass)){
+                VentanaPrincipal principal = new VentanaPrincipal();
+                principal.setVisible(true);
+                this.setVisible(false);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Error en los datos, por favor confirme");
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jbtnenviarActionPerformed
 
