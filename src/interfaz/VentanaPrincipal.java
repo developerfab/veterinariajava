@@ -35,7 +35,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         solicitarCita = new javax.swing.JButton();
         cancelarCita = new javax.swing.JButton();
         registrarMascota = new javax.swing.JButton();
-        atenderMascota = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -51,6 +50,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         });
 
         cancelarCita.setText("Cancelar Cita");
+        cancelarCita.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelarCitaActionPerformed(evt);
+            }
+        });
 
         registrarMascota.setText("Registrar Mascota");
         registrarMascota.addActionListener(new java.awt.event.ActionListener() {
@@ -58,8 +62,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 registrarMascotaActionPerformed(evt);
             }
         });
-
-        atenderMascota.setText("Atender Mascota");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,7 +74,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(130, 130, 130)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(atenderMascota, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(cancelarCita, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                         .addComponent(solicitarCita, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -90,9 +91,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(cancelarCita)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(registrarMascota)
-                .addGap(12, 12, 12)
-                .addComponent(atenderMascota)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
@@ -113,6 +112,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         VistaRegistrarMascota vistaregistrarmascota = new VistaRegistrarMascota();
         vistaregistrarmascota.setVisible(true);
     }//GEN-LAST:event_registrarMascotaActionPerformed
+
+    private void cancelarCitaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelarCitaActionPerformed
+        VistaCancelarCita cancelar = new VistaCancelarCita();
+        cancelar.setVisible(true);
+    }//GEN-LAST:event_cancelarCitaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,7 +154,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton atenderMascota;
     private javax.swing.JButton cancelarCita;
     private javax.swing.JButton registrarMascota;
     private javax.swing.JButton solicitarCita;

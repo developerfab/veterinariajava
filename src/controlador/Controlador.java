@@ -183,7 +183,22 @@ public class Controlador {
         externa.setConsultorio(Integer.parseInt(consultorio));
         externa.setTipo(tipo);
         externa.setFecha(fecha_date);
+        
+        //confirmacion de guardado en la base de datos
         confirma = externa.guardarCita(sesion.getPersona());
         return confirma;
+    }
+    
+    /** cancelarCita
+     * Este metodo se encarga de cancelar la cita con el identificador asignado.
+     * @param id_cita
+     * @return
+     * @throws SQLException 
+     */
+    public boolean cancelarCita(String id_cita) throws SQLException{
+        boolean registro = false;
+        ConsultaExterna externa = new ConsultaExterna();
+        registro=externa.cancelarCita(id_cita);
+        return registro;
     }
 }
